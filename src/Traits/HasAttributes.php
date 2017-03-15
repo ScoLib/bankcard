@@ -3,7 +3,6 @@
 
 namespace Sco\Bankcard\Traits;
 
-
 trait HasAttributes
 {
     protected $attributes = [];
@@ -31,5 +30,4 @@ trait HasAttributes
 
         return $this;
     }
-
 }

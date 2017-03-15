@@ -3,13 +3,13 @@
 
 namespace Sco\Bankcard\Providers;
 
-
 class RegexProvider extends AbstractProvider
 {
-
-
-    public static function getBankInfo($bankCode)
+    protected function getBankInfoByCardNo($cardNo)
     {
+    }
 
+    protected function mapInfoToObject(array $bankInfo)
+    {
     }
 }

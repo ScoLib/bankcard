@@ -3,7 +3,6 @@
 
 namespace Sco\Bankcard\Contracts;
 
-
 interface Info
 {
     public function getBank();
@@ -17,5 +16,4 @@ interface Info
     public function getCardType();
 
     public function getCardTypeName();
-
 }

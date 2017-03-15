@@ -3,7 +3,6 @@
 
 namespace Sco\Bankcard\Contracts;
 
-
 interface Provider
 {
     /**

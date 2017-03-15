@@ -3,7 +3,6 @@
 
 namespace Sco\Bankcard;
 
-
 use Sco\Bankcard\Contracts\Factory as FactoryContract;
 use Sco\Bankcard\Contracts\Provider as ProviderContract;
 use Sco\Bankcard\Providers\AlipayProvider;

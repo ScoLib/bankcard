@@ -8,7 +8,6 @@ use Sco\Bankcard\Traits\HasAttributes;
 
 class Info implements InfoContract
 {
-
     use HasAttributes;
 
     public function __construct(array $attributes)
@@ -29,7 +28,6 @@ class Info implements InfoContract
     public function getBankIcon()
     {
         return $this->getAttribute('bankIcon');
-
     }
 
     public function getBankInfo()
@@ -40,12 +38,10 @@ class Info implements InfoContract
     public function getCardType()
     {
         return $this->getAttribute('cardType');
-
     }
 
     public function getCardTypeName()
     {
         return $this->getAttribute('cardTypeName');
-
     }
 }
