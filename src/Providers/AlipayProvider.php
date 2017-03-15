@@ -2,9 +2,20 @@
 
 namespace Sco\Bankcard\Providers;
 
+use Sco\Bankcard\Exceptions\HttpException;
+use Sco\Bankcard\Exceptions\ValidationException;
+use Sco\Bankcard\Info;
+
 class AlipayProvider extends AbstractProvider
 {
-    protected static $bankList = [
+    protected $cardTypes = [
+        'DC'  => '储蓄卡',
+        'CC'  => '信用卡',
+        'SCC' => '准贷记卡',
+        'PC'  => '预付费卡',
+    ];
+
+    protected $bankLists = [
         'HDBANK'    => '邯郸银行',
         'BSB'       => '包商银行',
         'JSB'       => '晋商银行',
@@ -172,13 +183,40 @@ class AlipayProvider extends AbstractProvider
         'YQCCB'     => '阳泉银行',
     ];
 
-    public static function getBankInfo($bankCode)
+    protected function getBankInfoByCardNo($cardNo)
     {
-        $result   = file_get_contents("https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo={$cardNo}&cardBinCheck=true");
+        $url = "https://ccdcapi.alipay.com/validateAndCacheCardInfo.json"
+            . "?_input_charset=utf-8&cardNo={$cardNo}&cardBinCheck=true";
+
+        $content = file_get_contents($url);
+        if (!$content) {
+            throw new HttpException();
+        }
+
+        $bankInfo = json_decode($content, true);
+        if (!$bankInfo['validated']) {
+            throw new ValidationException();
+        }
+
+        return $bankInfo;
     }
 
-    public static function getBankIcon($bankCode)
+    protected function mapInfoToObject(array $bankInfo)
     {
-        return "https://apimg.alipay.com/combo.png?d=cashier&t={$bankCode}";
+        $bank  = $this->arrayItem($bankInfo, 'bank');
+        $cardType = $this->arrayItem($bankInfo, 'cardType');
+
+        return new Info([
+            'bank' => $bank,
+            'bankName' => $this->arrayItem($this->bankLists, $bank),
+            'bankIcon' => $this->getBankIcon($bank),
+            'cardType' => $cardType,
+            'cardTypeName' => $this->arrayItem($this->cardTypes, $cardType),
+        ]);
+    }
+
+    protected function getBankIcon($bank)
+    {
+        return "https://apimg.alipay.com/combo.png?d=cashier&t={$bank}";
     }
 }
