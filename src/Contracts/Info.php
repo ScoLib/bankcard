@@ -5,7 +5,7 @@ namespace Sco\Bankcard\Contracts;
 
 interface Info
 {
-    public function getBank();
+    public function getBankCode();
 
     public function getBankName();
 

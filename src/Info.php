@@ -15,9 +15,9 @@ class Info implements InfoContract
         $this->attributes = $attributes;
     }
 
-    public function getBank()
+    public function getBankCode()
     {
-        return $this->getAttribute('bank');
+        return $this->getAttribute('bankCode');
     }
 
     public function getBankName()

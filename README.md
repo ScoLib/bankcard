@@ -24,6 +24,24 @@ $ composer require scolib/bankcard
 ``` php
 $bankcard = new Sco\Bankcard\Bankcard();
 $info = $bankcard->info($cardNo);
+
+// 所有银行卡信息
+$info->getBankInfo();
+
+// 所属银行代号
+$info->getBankCode();
+
+// 所属银行名称
+$info->getBankName();
+
+// 所属银行icon（如果有值）
+$info->getBankIcon();
+
+// 卡类型代号
+$info->getCardType();
+
+// 卡类型名称
+$info->getCardTypeName();
 ```
 
 ## Change log
