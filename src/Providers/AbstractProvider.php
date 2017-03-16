@@ -7,9 +7,6 @@ use Sco\Bankcard\Contracts\Provider as ProviderContract;
 
 abstract class AbstractProvider implements ProviderContract
 {
-    protected $cardTypes = [];
-
-    protected $bankLists = [];
 
     /**
      * 通过卡号获取银行卡信息.
@@ -29,6 +26,9 @@ abstract class AbstractProvider implements ProviderContract
      */
     abstract protected function mapInfoToObject(array $bankInfo);
 
+    /**
+     * @inheritdoc
+     */
     public function info($cardNo = null)
     {
         if (empty($cardNo) || !is_numeric($cardNo)) {
@@ -40,6 +40,11 @@ abstract class AbstractProvider implements ProviderContract
         $info = $this->mapInfoToObject($bankInfo)->merge(['cardNo' => $cardNo]);
 
         return $info;
+    }
+
+    protected function getBankIcon($bankCode)
+    {
+        return '';
     }
 
     /**

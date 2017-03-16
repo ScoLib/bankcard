@@ -8,7 +8,8 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-根据银行卡号识别所属银行以及卡类型
+根据银行卡号识别所属银行以及卡类型   
+目前支持两种识别方式：阿里API和正则，默认使用阿里的API
 
 
 ## 安装
@@ -23,9 +24,13 @@ $ composer require scolib/bankcard
 
 ``` php
 $bankcard = new Sco\Bankcard\Bankcard();
+//$bankcard = new Sco\Bankcard\Bankcard(new Sco\Bankcard\Providers\RegexProvider());
+
+// 返回一个Sco\Bankcard\Info实例
+// 如果未识别 抛出异常 Sco\Bankcard\Exceptions\ValidationException
 $info = $bankcard->info($cardNo);
 
-// 所有银行卡信息
+// 银行卡信息（数组）
 $info->getBankInfo();
 
 // 所属银行代号
@@ -34,7 +39,7 @@ $info->getBankCode();
 // 所属银行名称
 $info->getBankName();
 
-// 所属银行icon（如果有值）
+// 所属银行icon（如果有）
 $info->getBankIcon();
 
 // 卡类型代号
@@ -46,7 +51,7 @@ $info->getCardTypeName();
 
 ## Change log
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+[更新日志](CHANGELOG.md)
 
 ## Testing
 

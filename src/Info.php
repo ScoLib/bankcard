@@ -15,6 +15,11 @@ class Info implements InfoContract
         $this->attributes = $attributes;
     }
 
+    public function getBankInfo()
+    {
+        return $this->getAttributes();
+    }
+
     public function getBankCode()
     {
         return $this->getAttribute('bankCode');
@@ -28,11 +33,6 @@ class Info implements InfoContract
     public function getBankIcon()
     {
         return $this->getAttribute('bankIcon');
-    }
-
-    public function getBankInfo()
-    {
-        return $this->getAttributes();
     }
 
     public function getCardType()

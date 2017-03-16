@@ -10,6 +10,9 @@ use Sco\Bankcard\Info;
 
 class AlipayProvider extends AbstractProvider
 {
+    /**
+     * @inheritdoc
+     */
     protected function getBankInfoByCardNo($cardNo)
     {
         $url = "https://ccdcapi.alipay.com/validateAndCacheCardInfo.json"
@@ -28,6 +31,9 @@ class AlipayProvider extends AbstractProvider
         return $bankInfo;
     }
 
+    /**
+     * @inheritdoc
+     */
     protected function mapInfoToObject(array $bankInfo)
     {
         $bankCode  = $this->arrayItem($bankInfo, 'bank');

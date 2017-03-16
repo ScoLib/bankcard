@@ -1888,6 +1888,9 @@ class RegexProvider extends AbstractProvider
         ],
     ];
 
+    /**
+     * @inheritdoc
+     */
     protected function getBankInfoByCardNo($cardNo)
     {
         foreach ($this->patterns as $val) {
@@ -1904,6 +1907,9 @@ class RegexProvider extends AbstractProvider
         throw new ValidationException();
     }
 
+    /**
+     * @inheritdoc
+     */
     protected function mapInfoToObject(array $bankInfo)
     {
         return new Info([
@@ -1913,10 +1919,5 @@ class RegexProvider extends AbstractProvider
             'cardType'     => $bankInfo['cardType'],
             'cardTypeName' => CardType::get($bankInfo['cardType']),
         ]);
-    }
-
-    protected function getBankIcon($bankCode)
-    {
-        return '';
     }
 }
